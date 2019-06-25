@@ -3,6 +3,7 @@
         <ul>
             <li v-for="(animal, index) in listOfAnimals" :key=index>
                 Species: {{ animal.species }}   Name: {{ animal.name }}   Date of Birth: {{ checkIfEmpty(animal.birthDate) }}
+                <button @click="removeAnimal(index)">Remove</button>
             </li>
         </ul>
     </div>
@@ -29,6 +30,10 @@ export default {
             } else {
                 return date;
             }
+        },
+
+        removeAnimal (index) {
+            this.listOfAnimals.splice(index, 1);
         }
     }
 }

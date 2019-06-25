@@ -14,6 +14,10 @@
                 <input type="date" id="birthDate" v-model="newAnimal.birthDate">
             </div>
 
+            <select name="sector" id="sector" v-model="newAnimal.sector" required>
+                <option :value=sector v-for="(sector, index) in sectors" :key=index>{{ sector }}</option>
+            </select>
+
             <div>
                 <button type="submit">Add Animal</button>
             </div>
@@ -21,7 +25,7 @@
 
         <ul>
             <li v-for="(animal, index) in listOfAnimals" :key=index>
-                Species: {{ animal.species }}   Name: {{ animal.name }}   Date of Birth: {{ checkIfEmpty(animal.birthDate) }}
+                Species: {{ animal.species }}   Name: {{ animal.name }}   Date of Birth: {{ checkIfEmpty(animal.birthDate) }}   Sector: {{ animal.sector }}
                 <button @click="removeAnimal(index)">Remove</button>
                 <button @click="moveToTop(index)">Move to Top</button>
             </li>
@@ -36,16 +40,19 @@ export default {
             newAnimal: {
                 species: '',
                 name: '',
-                birthDate: ''
+                birthDate: '',
+                sector: ''
             },
 
             listOfAnimals: [
-                {species: 'Horse', name: 'Konjo', birthDate: ''},
-                {species: 'Fox', name: 'Lijo', birthDate: '09.12.2004.'},
-                {species: 'Lynx', name: 'Riso', birthDate: '04.01.2001.'},
-                {species: 'Bear', name: 'Grizo', birthDate: '10.03.2013.'},
-                {species: 'Monkey', name: 'Majmo', birthDate: '01.01.2010.'}
-            ]
+                {species: 'Horse', name: 'Konjo', birthDate: '', sector: 'Mammals'},
+                {species: 'Fox', name: 'Lijo', birthDate: '09.12.2004.', sector: 'Mammals'},
+                {species: 'Lynx', name: 'Riso', birthDate: '04.01.2001.', sector: 'Mammals'},
+                {species: 'Bear', name: 'Grizo', birthDate: '10.03.2013.', sector: 'Mammals'},
+                {species: 'Monkey', name: 'Majmo', birthDate: '01.01.2010.', sector: 'Mammals'}
+            ],
+
+            sectors: [ 'Birds' , 'Mammals', 'Fishes']
         }
     },
 

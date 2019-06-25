@@ -23,13 +23,25 @@
             </div>
         </form>
 
-        <ul>
-            <li v-for="(animal, index) in listOfAnimals" :key=index>
-                Species: {{ animal.species }}   Name: {{ animal.name }}   Date of Birth: {{ checkIfEmpty(animal.birthDate) }}   Sector: {{ animal.sector }}
-                <button @click="removeAnimal(index)">Remove</button>
-                <button @click="moveToTop(index)">Move to Top</button>
-            </li>
-        </ul>
+        <table style="width:100%"> 
+            <tr v-for="(animal, index) in listOfAnimals" :key=index>
+                <td> Species: {{ animal.species }} </td>
+                <td>  Name: {{ animal.name }} </td>
+                <td>   Date of Birth: {{ checkIfEmpty(animal.birthDate) }} </td>
+                <td> Sector: {{ animal.sector }}   </td>
+                <td><button @click="removeAnimal(index)">Remove</button></td>
+                <td><button @click="moveToTop(index)">Move to Top</button></td>
+            </tr>
+        </table>
+
+        <br/>
+        <br/>
+        <table style="width:100%">
+            <tr v-for="(sector, index) in sectors" :key=index>
+                <td>{{ sector }}</td>
+                <td><button @click="filterAnimals(sector)">See list of Animals</button></td>
+            </tr>
+        </table>
     </div>
 </template>
 
@@ -81,6 +93,12 @@ export default {
                 name: '',
                 birthDate: ''
             }
+        },
+
+        filterAnimals (sector) {
+            let filtered = this.listOfAnimals.filter(el => el.sector === sector).map(animal => animal.name);
+            alert(filtered);
+
         }
     }
 }
